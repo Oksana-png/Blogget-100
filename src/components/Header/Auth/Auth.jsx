@@ -1,38 +1,16 @@
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import style from './Auth.module.css';
 import {ReactComponent as IconAuth} from './img/login.svg';
 import {urlAuth} from '../../../api/auth.js';
 import {Text} from '../../../UI/Text';
-import {useEffect, useState} from 'react';
-import {URL_API} from '../../../api/const';
+import {useAuth} from '../../../hooks/useAuth';
 
 
 export const Auth = ({token, delToken}) => {
-  const [auth, setAuth] = useState('');
+  console.log(token);
   const [logoutOpen, setLogoutOpen] = useState(false);
-
-  useEffect(() => {
-    if (!token) return;
-
-    fetch(`${URL_API}/api/v1/me`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then(({name, icon_img: iconImg}) => {
-        const img = iconImg.replace(/\?.*$/, '');
-        setAuth({name, img});
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.status === 401) {
-          delToken();
-        }
-        setAuth({});
-        // очищаем, если получили token, но он например не действительный
-      });
-  }, [token]);
+  const [auth] = useAuth(token);
 
   return (
     <div className={style.container}>
@@ -45,7 +23,7 @@ export const Auth = ({token, delToken}) => {
           {logoutOpen && (
             <button className={style.logout} onClick={() => {
               delToken();
-              setAuth({});
+              // setAuth({});
             }} >
               Выйти
             </button>
