@@ -25,8 +25,12 @@ export const useAuth = (token) => {
         setAuth({});
         // очищаем, если получили token, но он например не действительный
       });
+  }, []);
 
+  const setAuthData = (data) => {
+    setAuth({...data});
+  };
 
-    console.log(auth);
-  }, [auth]);
+  console.log(auth);
+  return [auth, setAuthData];
 };
