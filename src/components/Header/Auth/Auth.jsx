@@ -10,7 +10,7 @@ import {useAuth} from '../../../hooks/useAuth';
 export const Auth = ({token, delToken}) => {
   const [logoutOpen, setLogoutOpen] = useState(false);
   const [authData, setAuthData] = useAuth(token);
-  // console.log(authData);
+  console.log(authData);
 
   return (
     <div className={style.container}>

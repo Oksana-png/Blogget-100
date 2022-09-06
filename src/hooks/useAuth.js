@@ -27,8 +27,8 @@ export const useAuth = (token) => {
       });
   }, []);
 
-  const setAuthData = (data) => {
-    setAuth({...data});
+  const setAuthData = ({...rest}) => {
+    setAuth(rest);
   };
 
   console.log(auth);
