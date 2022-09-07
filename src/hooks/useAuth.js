@@ -12,25 +12,23 @@ export const useAuth = (token) => {
         Authorization: `bearer ${token}`,
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 401) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
       .then(({name, icon_img: iconImg}) => {
         const img = iconImg.replace(/\?.*$/, '');
         setAuth({name, img});
       })
       .catch((err) => {
         console.log(err);
-        if (err.status === 401) {
-          // delToken();
-        }
         setAuth({});
-        // очищаем, если получили token, но он например не действительный
       });
-  }, []);
+  }, [token]);
 
-  const setAuthData = ({...rest}) => {
-    setAuth(rest);
-  };
+  const clearAuth = () => setAuth({});
 
-  console.log(auth);
-  return [auth, setAuthData];
+  return [auth, clearAuth];
 };

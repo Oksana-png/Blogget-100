@@ -9,21 +9,23 @@ import {useAuth} from '../../../hooks/useAuth';
 
 export const Auth = ({token, delToken}) => {
   const [logoutOpen, setLogoutOpen] = useState(false);
-  const [authData, setAuthData] = useAuth(token);
-  console.log(authData);
+
+
+  const [auth, clearAuth] = useAuth(token);
+
 
   return (
     <div className={style.container}>
-      {authData.name ? (
+      {auth.name ? (
         <>
           <button className={style.button} onClick={() => setLogoutOpen(!logoutOpen)}>
-            <img className={style.img} src={authData.img} title={authData.name} alt={`avatar: ${authData.name}`}/>
+            <img className={style.img} src={auth.img} title={auth.name} alt={`avatar: ${auth.name}`}/>
           </button>
           {/* создаем состояние для кнопки, при клике на аватарку меняем состояние */}
           {logoutOpen && (
             <button className={style.logout} onClick={() => {
               delToken();
-              setAuthData({});
+              clearAuth();
             }} >
               Выйти
             </button>
