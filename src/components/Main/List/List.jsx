@@ -1,7 +1,11 @@
 import style from './List.module.css';
 import Post from './Post';
+import {usePopular} from '../../../hooks/usePopular';
 
 export const List = () => {
+  const [popularPosts] = usePopular();
+
+  console.log(popularPosts);
   const postsData = [
     {
       thumbnail: '',
@@ -11,30 +15,6 @@ export const List = () => {
       date: '2022-03-16T10:40:00.000Z',
       id: '123'
     },
-    {
-      thumbnail: '',
-      title: 'Title2',
-      author: 'Author2',
-      ups: 20,
-      date: '2022-08-24T19:30:00.000Z',
-      id: '345'
-    },
-    {
-      thumbnail: '',
-      title: 'Title3',
-      author: 'Author3',
-      ups: 24,
-      date: '2022-02-24T09:45:00.000Z',
-      id: '567'
-    },
-    {
-      thumbnail: '',
-      title: 'Title4',
-      author: 'Author4',
-      ups: 4,
-      date: '2021-12-29T09:59:00.000Z',
-      id: '789'
-    }
   ];
 
   return (
