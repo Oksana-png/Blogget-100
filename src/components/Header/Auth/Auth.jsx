@@ -8,10 +8,9 @@ import {tokenContext} from '../../../context/tokenContext';
 import {authContext} from '../../../context/authContext';
 
 export const Auth = () => {
-  const {token, delToken} = useContext(tokenContext);
+  const {delToken} = useContext(tokenContext);
   const [logoutOpen, setLogoutOpen] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
-  console.log(token);
 
   return (
     <div className={style.container}>

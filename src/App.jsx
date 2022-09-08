@@ -4,12 +4,14 @@ import {TokenContextProvider} from './context/tokenContext';
 import {AuthContextProvider} from './context/authContext';
 
 function App() {
-  <TokenContextProvider>
-    <AuthContextProvider>
-      <Header />
-      <Main/>
-    </AuthContextProvider>;
-  </TokenContextProvider>;
+  return (
+    <TokenContextProvider>
+      <AuthContextProvider>
+        <Header />
+        <Main/>
+      </AuthContextProvider>
+    </TokenContextProvider>
+  );
 }
 
 export default App;
