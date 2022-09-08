@@ -1,17 +1,15 @@
 import Header from './components/Header';
 import Main from './components/Main';
-import {useToken} from './hooks/useToken';
+import {TokenContextProvider} from './context/tokenContext';
+import {AuthContextProvider} from './context/authContext';
 
 function App() {
-  //  кастомный хук useToken
-  const [token, delToken] = useToken('');
-
-  return (
-    <>
-      <Header token={token} delToken={delToken} />
+  <TokenContextProvider>
+    <AuthContextProvider>
+      <Header />
       <Main/>
-    </>
-  );
+    </AuthContextProvider>;
+  </TokenContextProvider>;
 }
 
 export default App;

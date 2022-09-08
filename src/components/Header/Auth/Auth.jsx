@@ -1,18 +1,17 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import PropTypes from 'prop-types';
 import style from './Auth.module.css';
 import {ReactComponent as IconAuth} from './img/login.svg';
 import {urlAuth} from '../../../api/auth.js';
 import {Text} from '../../../UI/Text';
-import {useAuth} from '../../../hooks/useAuth';
+import {tokenContext} from '../../../context/tokenContext';
+import {authContext} from '../../../context/authContext';
 
-
-export const Auth = ({token, delToken}) => {
+export const Auth = () => {
+  const {token, delToken} = useContext(tokenContext);
   const [logoutOpen, setLogoutOpen] = useState(false);
-
-
-  const [auth, clearAuth] = useAuth(token);
-
+  const {auth, clearAuth} = useContext(authContext);
+  console.log(token);
 
   return (
     <div className={style.container}>
